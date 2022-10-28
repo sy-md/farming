@@ -25,7 +25,7 @@ type GRW_plants struct {
 	GrwPlt_amt int
 }
 type user struct {
-	Farm     [10]plot     `json:"farm"`
+	Farm     []plot       `json:"farm"`
 	Iventory []RDY_plants `json:"Iventory"`
 	SeedIvn  []GRW_plants `json:"seedIvn"`
 }
@@ -47,7 +47,7 @@ func main() {
 
 	collection := client.Database("atna_db").Collection("atna_frm_land")
 
-	p1 := &user{Farm: [10]plot{}, Iventory: []RDY_plants{}, SeedIvn: []GRW_plants{}}
+	p1 := &user{Farm: []plot{}, Iventory: []RDY_plants{}, SeedIvn: []GRW_plants{}}
 
 	insertentry, err := collection.InsertOne(context.TODO(), p1)
 	if err != nil {
