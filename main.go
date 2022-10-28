@@ -11,7 +11,7 @@ import (
 
 // Connection URI -- ask the user to log in instead
 // this is the database
-const uri = "mongodb+srv://@cluster0.erkptpf.mongodb.net/?retryWrites=true&w=majority"
+const uri = "mongodb+srv://mdorsett:12345@cluster0.erkptpf.mongodb.net/?retryWrites=true&w=majority"
 
 type plot struct {
 	field map[string]int
