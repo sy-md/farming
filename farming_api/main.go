@@ -33,7 +33,7 @@ func new_user() { // Create a new client and connect to the server
 	fmt.Println("username: ")
 	fmt.Scan(&username)
 
-	new_p1 := &main.user.user{Name: username, Farm: []plot{}, Iventory: []RDY_plants{}, SeedIvn: []GRW_plants{}}
+	new_p1 := &User{Name: username, Farm: []plot{}, Iventory: []RDY_plants{}, SeedIvn: []GRW_plants{}}
 
 	insertentry, err := collection.InsertOne(context.TODO(), new_p1)
 	if err != nil {

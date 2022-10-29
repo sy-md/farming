@@ -1,4 +1,4 @@
-package store
+package main
 
 type RDY_plants struct {
 	RdyPlt     string
@@ -8,7 +8,7 @@ type GRW_plants struct {
 	GrwPlt     string
 	GrwPlt_amt int
 }
-type user struct {
+type Store struct {
 	Iventory []RDY_plants `json:"Iventory"`
 	SeedIvn  []GRW_plants `json:"seedIvn"`
 }
