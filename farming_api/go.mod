@@ -1,4 +1,4 @@
-module farming/api
+module farm
 
 go 1.19
 

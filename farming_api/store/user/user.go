@@ -1,6 +1,6 @@
-package main
+package user
 
 type user struct {
 	Name     string `json:"userName"`
-	password string `json:"PassWord"`
+	Password string `json:"PassWord"`
 }

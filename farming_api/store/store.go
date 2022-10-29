@@ -1,4 +1,4 @@
-package main
+package store
 
 type RDY_plants struct {
 	RdyPlt     string
