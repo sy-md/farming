@@ -12,6 +12,7 @@ import (
 // Connection URI -- ask the user to log in instead
 // this is the database
 const uri = "mongodb+srv://mdorsett:12345@cluster0.erkptpf.mongodb.net/?retryWrites=true&w=majority"
+const add_user = "PrFGBAfshdio6TnQRfaWR0ENGqp3kqGYfiv0OaShnDhxhOiL3PFGyyz3kiOGG4xz"
 
 type plot struct {
 	field map[string]int
@@ -30,8 +31,7 @@ type user struct {
 	SeedIvn  []GRW_plants `json:"seedIvn"`
 }
 
-func main() {
-	// Create a new client and connect to the server
+func new_user() { // Create a new client and connect to the server
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 
 	if err != nil {
@@ -42,18 +42,20 @@ func main() {
 			panic(err)
 		}
 	}()
-
+	//users connects
 	fmt.Println("Successfully connected and pinged.")
 
 	collection := client.Database("atna_db").Collection("atna_frm_land")
 
-	p1 := &user{Farm: []plot{}, Iventory: []RDY_plants{}, SeedIvn: []GRW_plants{}}
+	new_p1 := &user{Farm: []plot{}, Iventory: []RDY_plants{}, SeedIvn: []GRW_plants{}}
 
-	insertentry, err := collection.InsertOne(context.TODO(), p1)
+	insertentry, err := collection.InsertOne(context.TODO(), new_p1)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Inserted a single document: ", insertentry.InsertedID)
+	fmt.Println("add user to the database", insertentry.InsertedID)
 
 }
+
+func main() {}
