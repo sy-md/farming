@@ -29,10 +29,11 @@ type Store struct { // store with seed on hand for farmer to buy
 	Iventory []Seeds `json:"Iventory"`
 }
 type Farm struct {
-	Plot     []planted_seed `json:"fields"`
-	SeedIvn  []Seeds        `json:"seedIvn"`
+	Plot     []planted_seed
+	SeedIvn  []string
 	plantIvn []planted_seed
-	Stock    []Seeds `json:"myStockivn"`
+	Stock    []Seeds
+	Money    int64
 }
 type User struct {
 	Name     string `json:"userName"`
@@ -69,7 +70,7 @@ func new_user() { // Create a new client and connect to the server
 
 	new_fld := planted_seed{Title: "dirt", Plant: "#", Water_lvl: 0}
 
-	new_user_farm := &Farm{Plot: []planted_seed{new_fld}, SeedIvn: []Seeds{}, Stock: []Seeds{}, plantIvn: []planted_seed{}}
+	new_user_farm := &Farm{Plot: []planted_seed{new_fld}, SeedIvn: []string{}, Stock: []Seeds{}, plantIvn: []planted_seed{}}
 	new_act := User{Name: username, Password: password, Myfarm: *new_user_farm}
 
 	new_user, err := collection.InsertOne(context.TODO(), new_user_farm)
@@ -111,6 +112,23 @@ func show_farm() {
 	//fmt.Println(result)
 }
 
+func builder(username string) {
+	//client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	//coll := client.Database("atna_frm_land").Collection("user")
+	//var result bson.D
+	//err = coll.FindOne(context.TODO(), bson.D{{Key: "Name", Value: username}}).Decode(&result)
+	//if err != nil {
+	//	fmt.Println("user not found")
+	//}
+	//filter := bson.D{{"Name", username}}
+	//update := bson.D{"$set": bson.D{"$set": bson.D{"seedivn": {1, 2, 3, 4}}}}
+	//err = coll.UpdateOne(context.TODO(), filter, update)
+	//if err != nil {
+	//	fmt.Println("user not found")
+	//}
+
+}
+
 func start_app() {
 	var username string
 	fmt.Println("username: ")
@@ -129,7 +147,7 @@ func start_app() {
 			// This error means your query did not match any documents.
 			fmt.Println("didnt find", username, "making new account..")
 			new_fld := planted_seed{Title: "dirt", Plant: "#", Water_lvl: 0} //first plot
-			new_user_farm := &Farm{Plot: []planted_seed{new_fld}, SeedIvn: []Seeds{}, Stock: []Seeds{}, plantIvn: []planted_seed{}}
+			new_user_farm := &Farm{Plot: []planted_seed{new_fld}, SeedIvn: []string{}, Stock: []Seeds{}, plantIvn: []planted_seed{}}
 			new_act := User{Name: username, Password: passwd, Myfarm: *new_user_farm}
 			new_user_act, err := coll.InsertOne(context.TODO(), new_act)
 
@@ -143,6 +161,8 @@ func start_app() {
 
 	fmt.Println("starting app...")
 	fmt.Println("connecting...")
+	fmt.Println("loading...  world")
+	builder(username)
 	fmt.Println("welcome to the farm land", username)
 
 	var opts string
